@@ -2,14 +2,14 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
-import path from 'path'; // <--- ADD THIS IMPORT
+import path from 'path';
 
 export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
   ],
-  resolve: { // <--- ADD THIS RESOLVE BLOCK
+  resolve: {
     alias: {
       '@src': path.resolve(__dirname, './src'),
     },

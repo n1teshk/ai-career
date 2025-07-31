@@ -1,6 +1,6 @@
 // src/App.jsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./hooks/useAuth.jsx";
+import { AuthProvider } from "./hooks/useAuth.jsx"; // Correctly imports AuthProvider
 import Layout from "./components/layout/Layout";
 import HomePage from "./pages/index";
 import AboutUs from "./pages/AboutUs";
@@ -15,8 +15,8 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
-import { useEffect } from "react"; // <--- ADD THIS IMPORT
-import Cookies from "js-cookie";    // <--- ADD THIS IMPORT
+import { useEffect } from "react";
+import Cookies from "js-cookie";
 
 // --- ADD THIS IMPORT FOR CHECKOUT PAGE (Will create in Step 4) ---
 import Checkout from "./pages/Checkout";

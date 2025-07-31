@@ -1,83 +1,102 @@
 // src/hooks/useAuth.jsx
-import { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "@src/firebase/config"; // Ensure @src alias
+import React, { useState, useEffect, createContext, useContext } from 'react'; // Added createContext, useContext
 import {
-  signInWithEmailAndPassword,
-  GoogleAuthProvider,
   signInWithPopup,
-  signOut as firebaseSignOut,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   onAuthStateChanged,
-  createUserWithEmailAndPassword
-} from "firebase/auth";
+  signOut,
+} from 'firebase/auth';
+import { auth, googleProvider } from '../firebase/config'; // Make sure this path is correct
 
-import { doc, getDoc, setDoc } from "firebase/firestore"; // <--- ADD THIS IMPORT
-import Cookies from "js-cookie"; // <--- ADD THIS IMPORT
-import { db } from "@src/firebase/config"; // <--- ADD THIS IMPORT (for firestore instance)
+// Create an Auth Context
+const AuthContext = createContext(null);
 
+// Custom hook to use the authentication context
+// This hook provides the auth state and functions
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
 
-const AuthContext = createContext();
-
-export function AuthProvider({ children }) {
+// AuthProvider component to wrap your application
+export const AuthProvider = ({ children }) => { // Export AuthProvider
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (u) => { // <--- ADD 'async' here
-      if (u) {
-        setUser(u);
-        setLoading(false);
-
-        // --- ADD THIS BLOCK FOR REFERRER ID ---
-        const userDocRef = doc(db, "users", u.uid);
-        const userDocSnap = await getDoc(userDocRef);
-
-        // Only set referrerId if user document doesn't exist OR it exists but doesn't have a referrerId
-        if (!userDocSnap.exists() || !userDocSnap.data()?.referrerId) {
-          const affiliateRef = Cookies.get("affiliate_ref");
-          if (affiliateRef) {
-            await setDoc(
-              userDocRef,
-              { referrerId: affiliateRef },
-              { merge: true } // Use merge to avoid overwriting other user data
-            );
-          }
-        }
-        // -------------------------------------
-      } else {
-        setUser(null);
-        setLoading(false);
-      }
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
     });
-    return unsubscribe;
+    return () => unsubscribe();
   }, []);
 
-  const signInWithEmail = (email, pass) =>
-    signInWithEmailAndPassword(auth, email, pass);
+  const signInWithGoogle = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      await signInWithPopup(auth, googleProvider);
+    } catch (err) {
+      setError(err.message);
+      console.error("Google sign-in error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  const signInWithGoogle = () =>
-    signInWithPopup(auth, new GoogleAuthProvider());
+  const signupWithEmail = async (email, password) => {
+    setLoading(true);
+    setError(null);
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+    } catch (err) {
+      setError(err.message);
+      console.error("Email signup error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  const signOutUser = () => firebaseSignOut(auth);
+  const loginWithEmail = async (email, password) => {
+    setLoading(true);
+    setError(null);
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (err) {
+      setError(err.message);
+      console.error("Email login error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  const signUpWithEmail = (email, pass) =>
-    createUserWithEmailAndPassword(auth, email, pass);
+  const logout = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      await signOut(auth);
+    } catch (err) {
+      setError(err.message);
+      console.error("Logout error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const value = { // The value provided by the context
+    user,
+    loading,
+    error,
+    signInWithGoogle,
+    signupWithEmail,
+    loginWithEmail,
+    logout,
+  };
 
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        loading,
-        signInWithEmail,
-        signInWithGoogle,
-        signOut: signOutUser,
-        signUpWithEmail
-      }}
-    >
-      {children}
+    <AuthContext.Provider value={value}>
+      {!loading && children} {/* Only render children once loading is false */}
     </AuthContext.Provider>
   );
-}
-
-export function useAuth() {
-  return useContext(AuthContext);
-}
+};
