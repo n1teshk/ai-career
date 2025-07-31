@@ -1,0 +1,68 @@
+[
+  {
+    "projectId": "tweet-sentiment-analyzer",
+    "title": "Twitter Sentiment Analyzer",
+    "roleId": "nlp-engineer",
+    "difficulty": "Beginner",
+    "skillsDemonstrated": ["Python", "NLTK", "Sentiment Analysis"],
+    "techStack": ["Python", "Jupyter", "NLTK"],
+    "timeEstimate": "2 weeks",
+    "memo": "Build a system to fetch tweets using the Twitter API and analyze their sentiment (positive, negative, neutral) using NLTK. Present the results visually.",
+    "imageUrl": "https://via.placeholder.com/400x200?text=Tweet+Sentiment+Analyzer"
+  },
+  {
+    "projectId": "cv-autotagger",
+    "title": "Resume Auto-Tagger",
+    "roleId": "ml-engineer",
+    "difficulty": "Intermediate",
+    "skillsDemonstrated": ["Machine Learning", "Text Classification", "Python"],
+    "techStack": ["Python", "Scikit-learn", "Pandas"],
+    "timeEstimate": "3-4 weeks",
+    "memo": "Create an app that analyzes resumes and auto-tags them with relevant skills and job roles, using classic ML or NLP pipelines.",
+    "imageUrl": "https://via.placeholder.com/400x200?text=Resume+Auto-Tagger"
+  },
+  {
+    "projectId": "image-anomaly-detector",
+    "title": "Image Anomaly Detector",
+    "roleId": "ml-engineer",
+    "difficulty": "Advanced",
+    "skillsDemonstrated": ["Deep Learning", "Computer Vision", "PyTorch"],
+    "techStack": ["Python", "PyTorch", "OpenCV"],
+    "timeEstimate": "4-6 weeks",
+    "memo": "Develop a convolutional neural network (CNN) to spot anomalies in manufacturing images, such as identifying defects in produced parts.",
+    "imageUrl": "https://via.placeholder.com/400x200?text=Image+Anomaly+Detector"
+  },
+  {
+    "projectId": "ai-news-aggregator",
+    "title": "AI-powered News Aggregator",
+    "roleId": "data-scientist",
+    "difficulty": "Intermediate",
+    "skillsDemonstrated": ["APIs", "Summarization", "Data Visualization"],
+    "techStack": ["Python", "Flask", "React"],
+    "timeEstimate": "4 weeks",
+    "memo": "Design a service to collect news articles, summarize them with AI (use Hugging Face models), and visualize topic trends over time.",
+    "imageUrl": "https://via.placeholder.com/400x200?text=AI+News+Aggregator"
+  },
+  {
+    "projectId": "llm-prompt-tuning",
+    "title": "Prompt Tuning Playground",
+    "roleId": "prompt-engineer",
+    "difficulty": "Beginner",
+    "skillsDemonstrated": ["Prompt Engineering", "LLMs", "Evaluation"],
+    "techStack": ["Python", "OpenAI API", "Streamlit"],
+    "timeEstimate": "1-2 weeks",
+    "memo": "Create an interactive app to experiment with different prompts on LLMs (e.g., OpenAI, Cohere). Track performance and share results.",
+    "imageUrl": "https://via.placeholder.com/400x200?text=Prompt+Tuning+Playground"
+  },
+  {
+    "projectId": "job-offer-matcher",
+    "title": "Automated Job Offer Matcher",
+    "roleId": "ai-product-manager",
+    "difficulty": "Intermediate",
+    "skillsDemonstrated": ["AI Product Management", "APIs", "Recommendation Systems"],
+    "techStack": ["React", "Node.js", "MongoDB"],
+    "timeEstimate": "2-3 weeks",
+    "memo": "Prototype a system that matches a candidate's profile to relevant AI job postings, using basic matching and business logic.",
+    "imageUrl": "https://via.placeholder.com/400x200?text=Job+Offer+Matcher"
+  }
+]

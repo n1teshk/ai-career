@@ -1,0 +1,5 @@
+/* src/index.css */
+@import "tailwindcss";
+
+/* Any custom base styles or @theme directives can go here later,
+   but for now, keep it minimal to verify Tailwind */

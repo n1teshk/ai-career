@@ -1,0 +1,60 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Rules for the 'users' collection
+    match /users/{userId} {
+
+      // Allow read, update, delete only if the authenticated user's UID matches the document ID
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow update: if request.auth != null && request.auth.uid == userId;
+      allow delete: if request.auth != null && request.auth.uid == userId;
+
+      // Allow creation of new user documents on sign-up for any authenticated user
+      allow create: if request.auth != null;
+
+      // Subcollection for user's enrolled courses
+      match /courses/{courseId} {
+        allow read: if request.auth != null && request.auth.uid == userId;
+        allow write: if request.auth != null && request.auth.uid == userId;
+      }
+
+      // Subcollection for user's saved projects
+      match /saved_projects/{projectId} {
+        allow read: if request.auth != null && request.auth.uid == userId;
+        allow write: if request.auth != null && request.auth.uid == userId;
+      }
+
+      // Subcollection for selected role info (if you use it)
+      match /selected_role {
+        allow read: if request.auth != null && request.auth.uid == userId;
+        allow write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+
+    // Top-level 'courses' collection (publicly readable)
+    match /courses/{courseId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Top-level 'projects' collection (publicly readable)
+    match /projects/{projectId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Top-level 'blog' collection (publicly readable)
+    match /blog/{postId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // 'affiliatePayouts' collection must only be accessible to backend/Cloud Functions
+    match /affiliatePayouts/{documentId} {
+      allow read: if false;
+      allow write: if false;
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "firestore": {
+    "rules": "firestore.rules", // This line specifies the path to your Firestore rules file
+    "indexes": "firestore.indexes.json" // This line is optional, for indexes
+  },
+  "hosting": {
+    "public": "dist", // Or "public" if you're not using Vite build output
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/createStripeCheckoutSession",
+        "function": "createStripeCheckoutSession"
+      },
+      {
+        "source": "/stripeWebhook",
+        "function": "stripeWebhook"
+      }
+    ]
+  },
+  "functions": {
+    "source": "functions"
+  }
+}

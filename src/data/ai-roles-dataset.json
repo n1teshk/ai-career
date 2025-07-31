@@ -1,0 +1,46 @@
+[
+  {
+    "roleId": "ml-engineer",
+    "roleName": "Machine Learning Engineer",
+    "requiredSkills": ["Python", "NumPy", "Pandas", "Scikit-learn", "Deep Learning", "TensorFlow"],
+    "interviewQuestions": [
+      "Describe the bias-variance tradeoff.",
+      "How would you optimize a deep neural network?",
+      "What is regularization in machine learning?"
+    ],
+    "description": "Responsible for building, deploying, and optimizing machine learning models in production systems."
+  },
+  {
+    "roleId": "data-scientist",
+    "roleName": "Data Scientist",
+    "requiredSkills": ["Python", "Statistics", "Pandas", "Data Visualization", "SQL", "Machine Learning"],
+    "interviewQuestions": [
+      "How do you handle missing data?",
+      "Explain a situation where data visualization influenced a business decision.",
+      "What’s the difference between supervised and unsupervised learning?"
+    ],
+    "description": "Analyzes large datasets and uses statistical and machine learning methods to extract insights and drive decisions."
+  },
+  {
+    "roleId": "nlp-engineer",
+    "roleName": "NLP Engineer",
+    "requiredSkills": ["Python", "Natural Language Processing", "NLTK", "spaCy", "Machine Learning", "Deep Learning"],
+    "interviewQuestions": [
+      "How does word2vec work?",
+      "What is named entity recognition?",
+      "Describe an NLP pipeline you’ve built."
+    ],
+    "description": "Designs and implements language processing systems such as chatbots or sentiment analyzers using ML and NLP libraries."
+  },
+  {
+    "roleId": "ai-product-manager",
+    "roleName": "AI Product Manager",
+    "requiredSkills": ["Product Management", "AI Fundamentals", "Stakeholder Communication", "Roadmapping", "Data Analysis"],
+    "interviewQuestions": [
+      "How would you prioritize features for an AI product?",
+      "Describe a time you balanced technical and business tradeoffs.",
+      "How do you evaluate model success in business terms?"
+    ],
+    "description": "Guides the development and evolution of AI-powered products, balancing user needs, technical feasibility, and business impact."
+  }
+]

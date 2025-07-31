@@ -7,10 +7,21 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Node.js build/dependency
 node_modules
 dist
 dist-ssr
+# Additional build outputs/caches
+.next/           # For Next.js projects
+.nuxt/           # For Nuxt.js projects
+.parcel-cache/   # For Parcel projects
+coverage/        # Test coverage reports
+
+# Environment variables
 *.local
+.env
+.env.* # Ignore specific environment files like .env.development, .env.production
+!.env.example    # UNIGNORE: If you have an example .env file you want to commit
 
 # Editor directories and files
 .vscode/*
@@ -22,18 +33,24 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-# Node.js
-node_modules/
-npm-debug.log
+*.sublime-project    # Sublime Text
+*.sublime-workspace  # Sublime Text
+Thumbs.db            # Windows thumbnails
+ehthumbs.db          # Windows thumbnails
 
 # Python
 __pycache__/
 *.pyc
 .venv/
 venv/
+.pytest_cache/   # Pytest cache
 
-# macOS
-.DS_Store
+# Database files (if applicable)
+*.db
+*.sqlite
+*.sqlite3
 
-# Environment variables
-.env
+# Uploads/Generated content (if applicable)
+/uploads/
+/data/
+/tmp/
